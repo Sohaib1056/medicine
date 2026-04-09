@@ -1,0 +1,92 @@
+import { Schema, model, models } from 'mongoose'
+
+const LineSchema = new Schema({
+  medicineId: { type: String },
+  name: { type: String, required: true },
+  genericName: { type: String },
+  manufacturer: { type: String },
+  unitsPerPack: { type: Number, default: 1 },
+  packs: { type: Number, default: 0 },
+  totalItems: { type: Number, default: 0 },
+  orderedUnits: { type: Number, default: 0 },
+  buyPerPack: { type: Number, default: 0 },
+  buyPerUnit: { type: Number, default: 0 },
+  salePerPack: { type: Number, default: 0 },
+  salePerUnit: { type: Number, default: 0 },
+  expiry: { type: String }, // yyyy-mm-dd
+  category: { type: String },
+  brand: { type: String },
+  unitType: { type: String },
+  shelfNumber: { type: String },
+  maxPackAllow: { type: Number },
+  minStock: { type: Number },
+  barcode: { type: String },
+  defaultDiscountPct: { type: Number },
+  lineTaxType: { type: String, enum: ['percent', 'fixed'] },
+  lineTaxValue: { type: Number },
+  buyPerPackAfterTax: { type: Number, default: 0 },
+  buyPerUnitAfterTax: { type: Number, default: 0 },
+  image: { type: String }, // Image path
+})
+
+const PurchaseDraftSchema = new Schema({
+  date: { type: String, required: true }, // yyyy-mm-dd
+  invoice: { type: String, required: true, index: true },
+  supplierId: { type: String },
+  supplierName: { type: String },
+  companyId: { type: String },
+  companyName: { type: String },
+  sourceType: { type: String }, // e.g., 'PO'
+  sourceRef: { type: String },  // e.g., poNumber
+  invoiceTaxes: { type: [{ name: String, value: Number, type: { type: String, enum: ['percent', 'fixed'] }, applyOn: { type: String, enum: ['gross', 'net'] } }], default: [] },
+  totals: {
+    gross: { type: Number, default: 0 },
+    discount: { type: Number, default: 0 },
+    taxable: { type: Number, default: 0 },
+    lineTaxes: { type: Number, default: 0 },
+    invoiceTaxes: { type: Number, default: 0 },
+    net: { type: Number, default: 0 },
+  },
+  lines: { type: [LineSchema], default: [] },
+}, { timestamps: true, collection: 'pharmacy_purchasedrafts' })
+
+export type PurchaseDraftDoc = {
+  _id: string
+  date: string
+  invoice: string
+  supplierId?: string
+  supplierName?: string
+  companyId?: string
+  companyName?: string
+  invoiceTaxes?: { name: string; value: number; type: 'percent' | 'fixed'; applyOn: 'gross' | 'net' }[]
+  totals?: { gross: number; discount: number; taxable: number; lineTaxes: number; invoiceTaxes: number; net: number }
+  lines: {
+    medicineId?: string
+    name: string
+    genericName?: string
+    manufacturer?: string
+    unitsPerPack: number
+    packs: number
+    totalItems: number
+    buyPerPack: number
+    buyPerUnit: number
+    salePerPack: number
+    salePerUnit: number
+    expiry?: string
+    category?: string
+    brand?: string
+    unitType?: string
+    shelfNumber?: string
+    maxPackAllow?: number
+    minStock?: number
+    barcode?: string
+    defaultDiscountPct?: number
+    lineTaxType?: 'percent' | 'fixed'
+    lineTaxValue?: number
+    buyPerPackAfterTax?: number
+    buyPerUnitAfterTax?: number
+    image?: string
+  }[]
+}
+
+export const PurchaseDraft = models.Pharmacy_PurchaseDraft || model('Pharmacy_PurchaseDraft', PurchaseDraftSchema)
