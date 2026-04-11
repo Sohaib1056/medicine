@@ -1,34 +1,38 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { Toaster } from "@/components/ui/toaster";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import Index from "./pages/Index.tsx";
-import Products from "./pages/Products.tsx";
-import ProductDetail from "./pages/ProductDetail.tsx";
-import Cart from "./pages/Cart.tsx";
-import Checkout from "./pages/Checkout.tsx";
-import NotFound from "./pages/NotFound.tsx";
+import React from 'react';
+import TopBar from './components/TopBar';
+import Header from './components/Header';
+import Navigation from './components/Navigation';
+import HeroSection from './components/HeroSection';
+import BestDeals from './components/BestDeals';
+import ShopByCategory from './components/ShopByCategory';
+import FeaturedProducts from './components/FeaturedProducts';
+import HealthConcerns from './components/HealthConcerns';
+import HealthcareServices from './components/HealthcareServices';
+import WhyChoose from './components/WhyChoose';
+import AppDownload from './components/AppDownload';
+import Newsletter from './components/Newsletter';
+import Footer from './components/Footer';
+import FloatingButton from './components/FloatingButton';
 
-const queryClient = new QueryClient();
-
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/product/:id" element={<ProductDetail />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/checkout" element={<Checkout />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+function App() {
+  return (
+    <div className="min-h-screen bg-white font-sans">
+      <TopBar />
+      <Header />
+      <Navigation />
+      <HeroSection />
+      <BestDeals />
+      <ShopByCategory />
+      <FeaturedProducts />
+      <HealthConcerns />
+      <HealthcareServices />
+      <WhyChoose />
+      <AppDownload />
+      <Newsletter />
+      <Footer />
+      <FloatingButton />
+    </div>
+  );
+}
 
 export default App;

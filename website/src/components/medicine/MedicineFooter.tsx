@@ -1,36 +1,31 @@
 import React from 'react';
 import { Facebook, Instagram, Twitter, Youtube, Linkedin, Mail, Phone, MapPin, CreditCard } from 'lucide-react';
 
-const Footer = () => {
+const MedicineFooter = () => {
   return (
-    <footer className="bg-[#1A1A2E] text-white">
+    <footer className="bg-[#111111] text-white mt-16">
       <div className="max-w-7xl mx-auto px-4 py-12">
         <div className="grid md:grid-cols-4 gap-8 mb-8">
-          {/* Brand Column */}
+          {/* About MediCare */}
           <div>
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 bg-[#00B074] rounded-lg flex items-center justify-center">
-                <span className="text-white text-2xl font-bold">+</span>
-              </div>
-              <span className="text-2xl font-bold">MediCare</span>
-            </div>
+            <h3 className="font-bold text-lg mb-4">About MediCare</h3>
             <p className="text-gray-400 text-sm mb-4">
               Pakistan's most trusted online pharmacy delivering genuine medicines and health products to your doorstep.
             </p>
             <div className="flex gap-3">
-              <a href="#" className="w-9 h-9 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#00B074] transition">
+              <a href="#" className="w-9 h-9 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#00A651] transition">
                 <Facebook size={18} />
               </a>
-              <a href="#" className="w-9 h-9 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#00B074] transition">
+              <a href="#" className="w-9 h-9 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#00A651] transition">
                 <Instagram size={18} />
               </a>
-              <a href="#" className="w-9 h-9 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#00B074] transition">
+              <a href="#" className="w-9 h-9 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#00A651] transition">
                 <Twitter size={18} />
               </a>
-              <a href="#" className="w-9 h-9 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#00B074] transition">
+              <a href="#" className="w-9 h-9 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#00A651] transition">
                 <Youtube size={18} />
               </a>
-              <a href="#" className="w-9 h-9 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#00B074] transition">
+              <a href="#" className="w-9 h-9 bg-white/10 rounded-full flex items-center justify-center hover:bg-[#00A651] transition">
                 <Linkedin size={18} />
               </a>
             </div>
@@ -40,11 +35,11 @@ const Footer = () => {
           <div>
             <h3 className="font-bold text-lg mb-4">Quick Links</h3>
             <ul className="space-y-2 text-gray-400 text-sm">
-              <li><a href="#" className="hover:text-[#00B074] transition">About Us</a></li>
-              <li><a href="#" className="hover:text-[#00B074] transition">Our Services</a></li>
-              <li><a href="#" className="hover:text-[#00B074] transition">Health Blog</a></li>
-              <li><a href="#" className="hover:text-[#00B074] transition">Careers</a></li>
-              <li><a href="#" className="hover:text-[#00B074] transition">Contact Us</a></li>
+              <li><a href="#" className="hover:text-[#00A651] transition">About Us</a></li>
+              <li><a href="#" className="hover:text-[#00A651] transition">Our Services</a></li>
+              <li><a href="#" className="hover:text-[#00A651] transition">Health Blog</a></li>
+              <li><a href="#" className="hover:text-[#00A651] transition">Careers</a></li>
+              <li><a href="#" className="hover:text-[#00A651] transition">Contact Us</a></li>
             </ul>
           </div>
           
@@ -52,11 +47,11 @@ const Footer = () => {
           <div>
             <h3 className="font-bold text-lg mb-4">Our Policies</h3>
             <ul className="space-y-2 text-gray-400 text-sm">
-              <li><a href="#" className="hover:text-[#00B074] transition">Privacy Policy</a></li>
-              <li><a href="#" className="hover:text-[#00B074] transition">Terms & Conditions</a></li>
-              <li><a href="#" className="hover:text-[#00B074] transition">Return Policy</a></li>
-              <li><a href="#" className="hover:text-[#00B074] transition">Shipping Policy</a></li>
-              <li><a href="#" className="hover:text-[#00B074] transition">FAQs</a></li>
+              <li><a href="#" className="hover:text-[#00A651] transition">Privacy Policy</a></li>
+              <li><a href="#" className="hover:text-[#00A651] transition">Terms & Conditions</a></li>
+              <li><a href="#" className="hover:text-[#00A651] transition">Return Policy</a></li>
+              <li><a href="#" className="hover:text-[#00A651] transition">Shipping Policy</a></li>
+              <li><a href="#" className="hover:text-[#00A651] transition">FAQs</a></li>
             </ul>
           </div>
           
@@ -81,7 +76,7 @@ const Footer = () => {
         </div>
         
         {/* Bottom Bar */}
-        <div className="border-t border-gray-700 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="border-t border-gray-800 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-gray-400 text-sm">
             © 2024 MediCare. All rights reserved.
           </p>
@@ -98,7 +93,7 @@ const Footer = () => {
               <div className="w-12 h-8 bg-white rounded flex items-center justify-center text-xs font-bold text-gray-700">
                 MC
               </div>
-              <div className="w-12 h-8 bg-white rounded flex items-center justify-center text-xs font-bold text-[#00B074]">
+              <div className="w-12 h-8 bg-white rounded flex items-center justify-center text-xs font-bold text-[#00A651]">
                 Jazz
               </div>
               <div className="w-12 h-8 bg-white rounded flex items-center justify-center text-xs font-bold text-gray-700">
@@ -112,4 +107,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default MedicineFooter;
