@@ -1,8 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Search, ShoppingCart, User } from 'lucide-react';
+import { useCart } from '../context/CartContext';
 
 const Header = () => {
+  const { cartCount } = useCart();
+
   return (
     <div className="bg-white border-b py-4 px-4">
       <div className="max-w-7xl mx-auto flex items-center justify-between gap-8">
@@ -32,12 +35,14 @@ const Header = () => {
             <User size={20} />
             <span>Sign In</span>
           </Link>
-          <button className="relative">
+          <Link to="/cart" className="relative">
             <ShoppingCart size={24} className="text-[#1A1A2E] hover:text-[#00B074]" />
-            <span className="absolute -top-2 -right-2 bg-[#FF6B35] text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
-              0
-            </span>
-          </button>
+            {cartCount > 0 && (
+              <span className="absolute -top-2 -right-2 bg-[#FF6B35] text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">
+                {cartCount}
+              </span>
+            )}
+          </Link>
         </div>
       </div>
     </div>

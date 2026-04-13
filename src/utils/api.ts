@@ -1,7 +1,7 @@
 const rawBase = (import.meta as any).env?.VITE_API_URL as string | undefined
 const baseURL = rawBase
-  ? (/^https?:/i.test(rawBase) ? rawBase : `http://127.0.0.1:4000${rawBase}`)
-  : 'http://127.0.0.1:4000/api'
+  ? (/^https?:/i.test(rawBase) ? rawBase : `http://127.0.0.1:5000${rawBase}`)
+  : 'http://127.0.0.1:5000/api'
 
 export function getApiBase(): string {
   return baseURL
@@ -314,7 +314,7 @@ export const corporateApi = {
     }
     throw lastErr || new Error('Failed to delete claim')
   },
-  exportClaimUrl: (id: string) => `${(import.meta as any).env?.VITE_API_URL || ((typeof window !== 'undefined' && (window.location?.protocol === 'file:' || /Electron/i.test(navigator.userAgent || ''))) ? 'http://127.0.0.1:4000/api' : 'http://127.0.0.1:4000/api')}/corporate/claims/${encodeURIComponent(id)}/export`,
+  exportClaimUrl: (id: string) => `${(import.meta as any).env?.VITE_API_URL || ((typeof window !== 'undefined' && (window.location?.protocol === 'file:' || /Electron/i.test(navigator.userAgent || ''))) ? 'http://127.0.0.1:5000/api' : 'http://127.0.0.1:5000/api')}/corporate/claims/${encodeURIComponent(id)}/export`,
   // Payments
   listPayments: (params?: { companyId?: string; from?: string; to?: string; page?: number; limit?: number }) => {
     const qs = new URLSearchParams()

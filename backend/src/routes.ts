@@ -8,6 +8,7 @@ import adminRouter from './modules/admin/routes'
 import corporateRouter from './modules/corporate/routes'
 import aestheticRouter from './modules/aesthetic/routes'
 import biometricRouter from './modules/biometric/routes'
+import websiteRouter from './modules/website/routes'
 
 const router = Router()
 
@@ -20,5 +21,6 @@ router.use('/admin', adminRouter)
 router.use('/corporate', corporateRouter)
 router.use('/aesthetic', aestheticRouter)
 router.use('/biometric', biometricRouter)
+router.use('/website', websiteRouter)
 
 export default router

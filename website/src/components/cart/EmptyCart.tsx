@@ -1,12 +1,12 @@
-import React, { useState, useRef } from 'react';
-import { Upload, X, FileText, CheckCircle } from 'lucide-react';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { ShoppingCart, Upload, X, FileText, CheckCircle } from 'lucide-react';
 
-const UploadBanner = () => {
-  const [showModal, setShowModal] = useState(false);
+const EmptyCart = () => {
+  const [showUploadModal, setShowUploadModal] = useState(false);
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const [uploading, setUploading] = useState(false);
   const [uploadSuccess, setUploadSuccess] = useState(false);
-  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -24,12 +24,10 @@ const UploadBanner = () => {
 
     setUploading(true);
     try {
-      // Simulate upload - in production, this would call the backend API
       await new Promise(resolve => setTimeout(resolve, 2000));
-      
       setUploadSuccess(true);
       setTimeout(() => {
-        setShowModal(false);
+        setShowUploadModal(false);
         setSelectedFiles([]);
         setUploadSuccess(false);
       }, 2000);
@@ -43,31 +41,83 @@ const UploadBanner = () => {
 
   return (
     <>
-      <div className="bg-gradient-to-r from-[#e8f5e9] to-[#c8e6c9] py-4 px-4">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <p className="text-[#1A1A1A] font-medium">
-            Upload Prescription & Get Medicines Delivered in 2 Hours
-          </p>
-          <button 
-            onClick={() => setShowModal(true)}
-            className="flex items-center gap-2 bg-[#00A651] text-white px-6 py-2.5 rounded-lg hover:bg-[#008f47] transition font-medium"
+      <div className="max-w-2xl mx-auto px-4 py-16 text-center">
+        {/* Cart Icon */}
+        <div className="mb-8">
+          <div className="inline-flex items-center justify-center w-32 h-32 bg-gray-100 rounded-full">
+            <ShoppingCart size={64} className="text-gray-400" />
+          </div>
+        </div>
+
+        {/* Heading */}
+        <h2 className="text-3xl font-bold text-[#1A1A1A] mb-3">
+          Your cart is empty
+        </h2>
+        
+        {/* Subtext */}
+        <p className="text-base text-[#666666] mb-8">
+          Looks like you haven't added any medicines yet
+        </p>
+
+        {/* Buttons */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <Link
+            to="/medicines"
+            className="w-full sm:w-auto px-8 py-3.5 bg-[#00A651] text-white rounded-lg hover:bg-[#008f47] transition-colors font-semibold shadow-lg hover:shadow-xl"
           >
-            <Upload size={18} />
+            Start Shopping
+          </Link>
+          
+          <button 
+            onClick={() => setShowUploadModal(true)}
+            className="w-full sm:w-auto px-8 py-3.5 bg-white text-[#00A651] border-2 border-[#00A651] rounded-lg hover:bg-[#E8F5E9] transition-colors font-semibold flex items-center justify-center gap-2"
+          >
+            <Upload size={20} />
             Upload Prescription
           </button>
+        </div>
+
+        {/* Additional Info */}
+        <div className="mt-12 pt-8 border-t border-[#E0E0E0]">
+          <p className="text-sm text-[#666666] mb-4">Popular Categories</p>
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <Link
+              to="/medicines"
+              className="px-4 py-2 bg-gray-50 text-[#666666] rounded-full hover:bg-[#E8F5E9] hover:text-[#00A651] transition-colors text-sm"
+            >
+              Medicines
+            </Link>
+            <Link
+              to="/wellness"
+              className="px-4 py-2 bg-gray-50 text-[#666666] rounded-full hover:bg-[#E8F5E9] hover:text-[#00A651] transition-colors text-sm"
+            >
+              Vitamins
+            </Link>
+            <Link
+              to="/health-devices"
+              className="px-4 py-2 bg-gray-50 text-[#666666] rounded-full hover:bg-[#E8F5E9] hover:text-[#00A651] transition-colors text-sm"
+            >
+              Health Devices
+            </Link>
+            <Link
+              to="/personal-care"
+              className="px-4 py-2 bg-gray-50 text-[#666666] rounded-full hover:bg-[#E8F5E9] hover:text-[#00A651] transition-colors text-sm"
+            >
+              Personal Care
+            </Link>
+          </div>
         </div>
       </div>
 
       {/* Upload Modal */}
-      {showModal && (
+      {showUploadModal && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-            {/* Header */}
             <div className="flex items-center justify-between p-6 border-b">
               <h2 className="text-2xl font-bold text-[#1A1A1A]">Upload Prescription</h2>
               <button
                 onClick={() => {
-                  setShowModal(false);
+                  setShowUploadModal(false);
                   setSelectedFiles([]);
                   setUploadSuccess(false);
                 }}
@@ -77,7 +127,6 @@ const UploadBanner = () => {
               </button>
             </div>
 
-            {/* Content */}
             <div className="p-6">
               {uploadSuccess ? (
                 <div className="text-center py-8">
@@ -91,7 +140,6 @@ const UploadBanner = () => {
                 </div>
               ) : (
                 <>
-                  {/* Instructions */}
                   <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
                     <h3 className="font-bold text-[#1A1A1A] mb-2">Instructions:</h3>
                     <ul className="text-sm text-[#666666] space-y-1 list-disc list-inside">
@@ -102,9 +150,8 @@ const UploadBanner = () => {
                     </ul>
                   </div>
 
-                  {/* Upload Area */}
                   <div
-                    onClick={() => fileInputRef.current?.click()}
+                    onClick={() => document.getElementById('file-upload')?.click()}
                     className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center cursor-pointer hover:border-[#00A651] transition"
                   >
                     <Upload className="text-gray-400 mx-auto mb-4" size={48} />
@@ -115,7 +162,7 @@ const UploadBanner = () => {
                       JPG, PNG or PDF (Max 5MB)
                     </p>
                     <input
-                      ref={fileInputRef}
+                      id="file-upload"
                       type="file"
                       accept="image/*,.pdf"
                       multiple
@@ -124,7 +171,6 @@ const UploadBanner = () => {
                     />
                   </div>
 
-                  {/* Selected Files */}
                   {selectedFiles.length > 0 && (
                     <div className="mt-6">
                       <h3 className="font-bold text-[#1A1A1A] mb-3">
@@ -160,34 +206,6 @@ const UploadBanner = () => {
                     </div>
                   )}
 
-                  {/* Contact Info */}
-                  <div className="mt-6 bg-gray-50 rounded-lg p-4">
-                    <h3 className="font-bold text-[#1A1A1A] mb-2">Contact Information</h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <input
-                        type="text"
-                        placeholder="Full Name *"
-                        className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:border-[#00A651]"
-                      />
-                      <input
-                        type="tel"
-                        placeholder="Phone Number *"
-                        className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:border-[#00A651]"
-                      />
-                    </div>
-                    <textarea
-                      placeholder="Delivery Address *"
-                      rows={2}
-                      className="w-full mt-4 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:border-[#00A651]"
-                    />
-                    <textarea
-                      placeholder="Additional Notes (Optional)"
-                      rows={2}
-                      className="w-full mt-4 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:border-[#00A651]"
-                    />
-                  </div>
-
-                  {/* Upload Button */}
                   <button
                     onClick={handleUpload}
                     disabled={selectedFiles.length === 0 || uploading}
@@ -215,4 +233,4 @@ const UploadBanner = () => {
   );
 };
 
-export default UploadBanner;
+export default EmptyCart;

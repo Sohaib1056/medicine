@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import MedicineHeader from '../components/medicine/MedicineHeader';
 import MedicineNavigation from '../components/medicine/MedicineNavigation';
 import UploadBanner from '../components/medicine/UploadBanner';
@@ -7,6 +8,9 @@ import ProductGrid from '../components/medicine/ProductGrid';
 import MedicineFooter from '../components/medicine/MedicineFooter';
 
 const MedicineListing = () => {
+  const [searchParams] = useSearchParams();
+  const searchQuery = searchParams.get('search') || '';
+
   const [filters, setFilters] = useState({
     categories: [] as string[],
     brands: [] as string[],
@@ -14,9 +18,15 @@ const MedicineListing = () => {
     discounts: [] as string[],
     inStock: false,
     requiresPrescription: false,
+    search: searchQuery,
   });
 
   const [sortBy, setSortBy] = useState('popular');
+
+  // Update search filter when URL changes
+  useEffect(() => {
+    setFilters(prev => ({ ...prev, search: searchQuery }));
+  }, [searchQuery]);
 
   return (
     <div className="min-h-screen bg-white font-sans">
